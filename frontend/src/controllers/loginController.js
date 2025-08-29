@@ -24,11 +24,11 @@ async function handleLogin(event) {
     });
 
     const data = await response.json();
-
+    
     if (response.ok) {
       // Guardar token y datos del usuario
       localStorage.setItem('token', data.token);
-      localStorage.setItem('user', JSON.stringify(data.user));
+      localStorage.setItem('user', JSON.stringify(email));
       
       // Mostrar mensaje de éxito
       showMessage('Inicio de sesión exitoso', 'success');

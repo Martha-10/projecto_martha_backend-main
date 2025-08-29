@@ -1,7 +1,7 @@
  // auth.controller.js
 const login = (req, res) => {
     // Lógica para el inicio de sesión
-    res.send('Ruta de login');
+    res.status(200).json({ message: 'Ruta de login' });
 };
 
 const register = (req, res) => {
