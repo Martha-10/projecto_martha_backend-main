@@ -4,8 +4,15 @@ import { loadDynamicStyle } from "../utils/styleManager.js";
 import { initAccountEvents } from "../controllers/accountController.js";
 
 export async function showAccount() {
-  const user = JSON.parse(localStorage.getItem('user'));
-  
+  const userData = localStorage.getItem('user');
+
+  if (!userData) {
+  // No hay usuario, redirige al login o muestra mensaje
+  window.location.hash = '#/login';
+  return;
+}
+
+  const user = userData ? JSON.parse(userData) : null;
   const accountHTML = `
     <header class="header">
       <nav class="nav">

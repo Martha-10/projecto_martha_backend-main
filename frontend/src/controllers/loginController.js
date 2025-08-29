@@ -24,26 +24,43 @@ async function handleLogin(event) {
     });
 
     const data = await response.json();
-    
-    if (response.ok) {
-      // Guardar token y datos del usuario
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('user', JSON.stringify(email));
-      
-      // Mostrar mensaje de éxito
+    console.log('Respuesta del servidor:', data);
+
+
+    if (response.ok && data.token && data.user) {
+      const { token, user } = data;
+
+      localStorage.setItem('token', token);
+      localStorage.setItem('user', JSON.stringify(user)); // <- Asegúrate de que `user` es un objeto
+
+      if (user) {
+        localStorage.setItem('token', token);
+        localStorage.setItem('user', JSON.stringify(user));
+      } else {
+        console.error('❌ Usuario no definido en la respuesta del backend');
+        showMessage('Error en los datos recibidos', 'error');
+        return;
+      }
+
       showMessage('Inicio de sesión exitoso', 'success');
-      
-      // Redirigir a la cuenta del usuario
+
       setTimeout(() => {
         window.location.hash = '#/account';
       }, 1000);
-    } else {
-      showMessage(data.message || 'Error en el inicio de sesión', 'error');
     }
-  } catch (error) {
-    console.error('Error:', error);
-    showMessage('Error de conexión. Intenta de nuevo.', 'error');
+
+    showMessage('Inicio de sesión exitoso', 'success');
+
+    setTimeout(() => {
+      window.location.hash = '#/account';
+    }, 1000);
+  } else {
+    showMessage(data.message || 'Error en el inicio de sesión', 'error');
   }
+} catch (error) {
+  console.error('Error:', error);
+  showMessage('Error de conexión. Intenta de nuevo.', 'error');
+}
 }
 
 function showMessage(message, type) {
