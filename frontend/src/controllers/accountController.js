@@ -26,6 +26,6 @@ async function handleLogout() {
     localStorage.removeItem('user');
     
     // Redirigir al login
-    window.location.hash = '#/login';
+    window.location.hash = '#/';
   }
 }

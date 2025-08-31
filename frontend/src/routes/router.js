@@ -10,11 +10,11 @@ import { renderNotFound } from '../views/notfound.js';
 
 /* Mapea las rutas con las funciones de las vistas */
 const routes = {
-    '#/': showCatalog,
+    '#/': showLogin,
     '#/product': showProduct,
     '#/cart': showCart,
     '#/account': showAccount,
-    '#/login': showLogin
+    '#/catolog': showCatalog,
 };
 
 let previousRoute = null;
@@ -24,7 +24,7 @@ export function router() {
 
     // Redirigir a login si se intenta acceder a la cuenta sin estar autenticado
     if (path === '#/account' && !isAuthenticated()) {
-        window.location.hash = '#/login'; // Redirigir a login si no está autenticado
+        window.location.hash = '#/'; // Redirigir a login si no está autenticado
         return; // Detener la ejecución para no cargar la ruta de la cuenta
     }
 

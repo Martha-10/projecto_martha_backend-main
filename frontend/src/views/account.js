@@ -8,7 +8,7 @@ export async function showAccount() {
 
   if (!userData) {
   // No hay usuario, redirige al login o muestra mensaje
-  window.location.hash = '#/login';
+  window.location.hash = '#/';
   return;
 }
 

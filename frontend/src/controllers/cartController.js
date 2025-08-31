@@ -33,7 +33,7 @@ export async function initCartEvents() {
 async function loadCartItems() {
   const user = JSON.parse(localStorage.getItem('user'));
   if (!user) {
-    window.location.hash = '#/login';
+    window.location.hash = '#/';
     return;
   }
 
